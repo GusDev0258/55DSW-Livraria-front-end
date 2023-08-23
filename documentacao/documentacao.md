@@ -15,9 +15,9 @@ E-commerce de livros
 - Autor X
 - Endereco X
 - Cartão de Crédito X
-- Lista de desejo
-- Carrinho
-- Cupom
+- Lista de desejo X
+- Carrinho X
+- Cupom X
 - Idioma
 - País
 - Estado
