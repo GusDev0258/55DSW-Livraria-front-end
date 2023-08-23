@@ -5,7 +5,7 @@ import { VersionEnum } from "./version-model"
 
 export type BookModel = {
     id: number
-    name: string
+    title: string
     publisher: PublisherModel
     idiom: string
     numOfPages: number

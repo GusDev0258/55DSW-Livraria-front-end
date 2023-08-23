@@ -19,5 +19,5 @@ export namespace AddBook {
     authors: AuthorModel[]
   }
 
-  export type Model = BookModel
+  export type Model = BookModel | null | undefined
 }
