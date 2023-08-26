@@ -1,7 +1,0 @@
-export * from "./author-model"
-export * from "./book-model"
-export * from "./category-model"
-export * from "./publisher-model"
-export * from "./sub-category-model"
-export * from "./version-model"
-export * from "./address-model"
