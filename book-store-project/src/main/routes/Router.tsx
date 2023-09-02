@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from '../../presentation/components/Home'
+import Home from '../../presentation/pages/Home'
 
 
 const Router = () => {

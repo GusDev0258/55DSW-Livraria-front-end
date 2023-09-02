@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./search_bar/Search-Bar";
 import { LuUser, LuShoppingCart } from "react-icons/lu";
-import Logo from '../../../assets/logo.svg';
+import Logo from '../../../assets/logo2.svg';
 
 type Props = React.ComponentProps<"header">;
 
@@ -9,10 +9,10 @@ export default class Header extends Component<Props> {
   render() {
     return (
       <header
-        className="h-16 w-screen bg-zinc-50 text-zinc-600 text-base border-b-gray-200 flex items-center justify-center gap-10"
+        className="h-24 w-full bg-zinc-50 text-zinc-600 text-base flex items-center justify-center gap-10 border-2 border-zinc-200 border-solid"
         {...this.props}
       >
-        <div className="h-20 w-20 flex items-center justify-center mr-4">
+        <div className=" w-32 h-32 flex items-center justify-center mr-4">
           <img src={Logo} alt="Logo" className="w-full rounded block" />
         </div>
         <SearchBar placeholder="Buscar livros..." type="search" />

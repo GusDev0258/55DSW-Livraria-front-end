@@ -6,7 +6,7 @@ export default class InformationHeader extends Component<InformationHeaderProps>
   public render() {
     return (
       <>
-       <div className='bg-zinc-950 text-sm text-zinc-50 flex items-center justify-around h-9 w-screen'>
+       <div className='bg-zinc-950 text-sm text-zinc-50 flex items-center justify-around h-9 w-full'>
 
         <div className='information-container flex justify-center items-center gap-6'>
           <div className='flex items-center justify-center gap-1'>
