@@ -12,7 +12,7 @@ export default class Header extends Component<Props> {
         className="h-24 w-full bg-zinc-50 text-zinc-600 text-base flex items-center justify-center gap-10 border-2 border-zinc-200 border-solid"
         {...this.props}
       >
-        <div className=" w-32 h-32 flex items-center justify-center mr-4">
+        <div className=" w-36 h-36 flex items-center justify-center mr-4">
           <img src={Logo} alt="Logo" className="w-full rounded block" />
         </div>
         <SearchBar placeholder="Buscar livros..." type="search" />

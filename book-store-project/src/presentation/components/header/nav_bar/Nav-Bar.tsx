@@ -33,11 +33,12 @@ export const NavBar = (props: Props) => {
             <LuChevronDown size='16px' /> 
           </button>
           {categoryList && (
-            <div className='hidden category-nav absolute w-auto top-14 left-8'>
+            <div className='hidden category-nav absolute w-auto top-14 left-8' onMouseLeave={handleCategoryShow}>
             <ul className='top-7 w-auto h-auto grid grid-cols-5
              bg-zinc-50 text-zinc-600 text-base items-center justify-start gap-2 border-2 border-emerald-600 border-solid rounded-md'>
               {categoryList.map((category) => (
-                <li key={category.id} className='p-2 m-2 h-auto hover:bg-emerald-600 hover:text-zinc-100 text-sm cursor-pointer rounded text-center'>{category.name}</li>
+                <li key={category.id} className='p-2 m-2 h-auto hover:bg-emerald-600 hover:text-zinc-100 text-sm cursor-pointer rounded text-center' ><Link to={`/book/category/${category.id}`}>
+                {category.name}</Link> </li>
               ))}
             </ul>
             </div>
