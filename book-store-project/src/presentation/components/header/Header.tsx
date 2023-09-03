@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import SearchBar from "./search_bar/Search-Bar";
 import { LuUser, LuShoppingCart } from "react-icons/lu";
-import Logo from '../../../assets/logo2.svg';
+import Logo from "../../../assets/logo2.svg";
+import { Link } from "react-router-dom";
 
 type Props = React.ComponentProps<"header">;
 
@@ -17,16 +18,12 @@ export default class Header extends Component<Props> {
         </div>
         <SearchBar placeholder="Buscar livros..." type="search" />
         <div className="flex items-center justify-center gap-2">
-          <div            className="text-zinc-600 cursor-pointer hover:bg-zinc-800 hover:text-zinc-100 rounded p-3">
-            <LuUser
-              size="24px"
-            />
-          </div>
-          <div             className="text-zinc-600 cursor-pointer hover:bg-zinc-800 hover:text-zinc-100 rounded p-3">
-            <LuShoppingCart
-              size="24px"
-            />
-          </div>
+          <Link to={'/login'} className="text-zinc-600 cursor-pointer hover:bg-zinc-800 hover:text-zinc-100 rounded p-3">
+            <LuUser size="24px" />
+          </Link>
+          <Link to={'/'} className="text-zinc-600 cursor-pointer hover:bg-zinc-800 hover:text-zinc-100 rounded p-3">
+            <LuShoppingCart size="24px" />
+          </Link>
         </div>
       </header>
     );

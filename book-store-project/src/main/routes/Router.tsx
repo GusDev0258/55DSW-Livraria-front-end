@@ -4,8 +4,9 @@ import Home from '../../presentation/pages/Home'
 import InformationHeader from '../../presentation/components/header/Information-header'
 import Header from '../../presentation/components/header/Header'
 import NavBar from '../../presentation/components/header/nav_bar/Nav-Bar'
-import BookDetail from '../../presentation/pages/Book/BookDetail'
-import BookCategory from '../../presentation/pages/Book/BookCategory'
+import BookDetail from '../../presentation/pages/book/BookDetail'
+import BookCategory from '../../presentation/pages/book/BookCategory'
+import Login from '../../presentation/pages/admin/login/Login'
 
 
 const Router = () => {
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/book/:id" element={<BookDetail />} />
         <Route path="/book/category/:id" element={<BookCategory />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   )
