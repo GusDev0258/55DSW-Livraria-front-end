@@ -3,25 +3,20 @@ import Banner from "../../assets/banner1.png";
 import { BookShelf } from "../components/book/BookShelf";
 import { getAllBooks } from "../../infra/http/request-book";
 import { BookModel } from "../../domain/models/book/book-model";
+import { useAllBooks } from "../hooks/useBook";
 
 export interface HomeProps {}
 
 
 export const Home = () => {
   const [bookList, setBookList] = React.useState<BookModel[] | []>([]);
+  const {books} = useAllBooks();
 
   React.useEffect(() => {
-    getAllBooks()
-      .then((books) => {
-        if (books) {
-          setBookList(books);
-          console.log(books);
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar livros", error);
-      });
-  },[])
+    if(books){
+      setBookList(books)
+    }
+  },[books])
   return (
     <>
       <img className="w-full h-96 object-cover" src={Banner}></img>

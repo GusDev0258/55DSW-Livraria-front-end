@@ -1,18 +1,35 @@
-import React, { Component } from 'react'
+import { ComponentProps, useState } from 'react'
 import { LuSearch } from 'react-icons/lu'
+import { useAllBooks } from '../../../hooks/useBook'
+import { BookModel } from '../../../../domain/models/book/book-model'
+import { Link } from 'react-router-dom'
 
 
-type Props = React.ComponentProps<'input'>
+type Props = ComponentProps<'input'>
 
+export const SearchBar = (props: Props) => {
+    const {books} = useAllBooks();
+    const [bookSearchList, setBookSearchList] = useState<BookModel[]>([]);
 
-export default class SearchBar extends Component<Props> {
-
-  render() {
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if(books){
+        setBookSearchList(books.filter(book => book.name.toLowerCase().includes(event.target.value.toLowerCase())))
+        handleSearchListShow();
+      }
+    }
+    const handleSearchListShow = () => {
+      document.querySelector('.search-list')?.classList.toggle('hidden');
+    }
     return (
       <div className='flex items-center relative w-96'>
-        <input className='h-10 w-full bg-zinc-200 text-zinc-600 text-base rounded-xl p-4 px-4 placeholder:text-zinc-400 placeholder:px-1 outline-none focus:border-2 focus:border-emerald-400' {...this.props}/>
+        <input className='h-10 w-full bg-zinc-100 text-zinc-300 text-base rounded-t-md p-4 px-4 placeholder:text-zinc-400 placeholder:px-1 outline-none focus:border-2 focus:border-emerald-400' {...props} onChange={handleSearch} onFocus={handleSearchListShow}/>
+        {bookSearchList.length > 0 && <div className='search-list absolute top-10 w-full bg-zinc-100 text-zinc-300 text-base rounded-t-none rounded-b-md p-4 px-4 placeholder:text-zinc-400 placeholder:px-1 outline-none focus:border-2 focus:border-emerald-400 max-h-72 overflow-y-scroll border-emerald-400 border-2 border-solid' onMouseLeave={handleSearchListShow}>
+          <ul className='flex flex-col flex-1 gap-2 '>
+          {bookSearchList.map(book => <li key={book.id} className='hover:bg-zinc-200 hover:text-zinc-400 p-2 rounded-sm cursor-pointer text-sm'><Link to={`/book/${book.id}`}>{book.name}</Link></li>)}
+          </ul>
+        </div>}
         <LuSearch className='absolute right-4 text-zinc-400' size='16px' />
       </div>
     )
   }
-}
+export default SearchBar;
