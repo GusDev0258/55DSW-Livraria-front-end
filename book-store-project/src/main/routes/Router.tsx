@@ -7,6 +7,7 @@ import NavBar from '../../presentation/components/header/nav_bar/Nav-Bar'
 import BookDetail from '../../presentation/pages/book/BookDetail'
 import BookCategory from '../../presentation/pages/book/BookCategory'
 import Login from '../../presentation/pages/admin/login/Login'
+import Register from '../../presentation/pages/admin/login/Register'
 
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/book/:id" element={<BookDetail />} />
         <Route path="/book/category/:id" element={<BookCategory />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   )

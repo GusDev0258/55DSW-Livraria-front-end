@@ -21,7 +21,6 @@ export const NavBar = (props: Props) => {
   }, []);
 
   function handleCategoryShow(): void {
-    console.log('Categorias: ', categoryList)
     document.querySelector('.category-nav')?.classList.toggle('hidden')
   }
 

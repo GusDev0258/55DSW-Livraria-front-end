@@ -31,7 +31,6 @@ export const getBookById = async (id: string | undefined): Promise<BookModel | u
 };
 
 export const getAllBooksByCategory = async (categoryId: string | undefined): Promise<BookModel[] | undefined> => {
-  console.log(categoryId);
   try {
     const response: AxiosResponse = await axios.get(`${BASE_URL}book/category/${categoryId}`, {
       headers: {

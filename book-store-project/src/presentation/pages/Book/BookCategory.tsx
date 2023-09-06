@@ -14,11 +14,9 @@ export const BookCategory = () => {
   const [bookList, setBookList] = useState<BookModel[] | []>([]);
 
   useEffect(() => {
-    console.log(categoryId);
     getAllBooksByCategory(categoryId).then((books) => {
       if (books) {
         setBookList(books);
-        console.log(books);
       }
     });
   },[categoryId]);
