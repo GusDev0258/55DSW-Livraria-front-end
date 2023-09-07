@@ -1,7 +1,6 @@
 import * as React from "react";
 import Banner from "../../assets/banner1.png";
 import { BookShelf } from "../components/book/BookShelf";
-import { getAllBooks } from "../../infra/http/request-book";
 import { BookModel } from "../../domain/models/book/book-model";
 import { useAllBooks } from "../hooks/useBook";
 
