@@ -17,7 +17,6 @@ export const SearchBar = (props: Props) => {
           book.name.toLowerCase().includes(event.target.value.toLowerCase())
         )
       );
-      handleSearchListShow();
     }
   };
   const handleSearchListShow = () => {
@@ -29,7 +28,7 @@ export const SearchBar = (props: Props) => {
         className="h-10 w-full bg-zinc-100 text-zinc-300 text-base rounded-t-md p-4 px-4 placeholder:text-zinc-400 placeholder:px-1 outline-none focus:border-2 focus:border-emerald-400"
         {...props}
         onChange={handleSearch}
-        onFocus={handleSearchListShow}
+        onClick={handleSearchListShow}
       />
       {bookSearchList.length > 0 && (
         <div

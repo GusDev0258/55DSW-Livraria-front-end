@@ -10,6 +10,9 @@ export type UserLoginModel = {
   password: string;
 }
 
-export type Token = {
+export type UserResponseModel = {
   token: string;
+  email: string;
+  firstname: string;
+  role: string;
 }

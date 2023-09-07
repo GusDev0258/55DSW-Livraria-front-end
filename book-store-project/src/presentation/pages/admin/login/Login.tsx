@@ -4,11 +4,14 @@ import Logo from "../../../../assets/logo2.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useToken } from "../../../hooks/useToken";
 import React, { useState } from "react";
-import { Token, UserLoginModel } from "../../../../domain/models/user/user-model";
+import { UserResponseModel, UserLoginModel } from "../../../../domain/models/user/user-model";
 import { requestLogin } from "../../../../infra/http/request-login";
+import { useUserDetails } from "../../../context/userContext";
+import Header from "../../../components/header/Header";
 export const Login = () => {
 
-  const {token, setToken} = useToken();
+  const {setToken} = useToken();
+  const {setUserDetails} = useUserDetails();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -20,10 +23,11 @@ export const Login = () => {
         email,
         password
       }
-      const userToken: Token = await requestLogin(user, token);
-      if(userToken){
-        setToken(userToken.token);
-        navigate("/")
+      const userResponse: UserResponseModel = await requestLogin(user);
+      if(userResponse){
+        await setToken(userResponse.token);
+        await setUserDetails({firstname: userResponse.firstname, email: userResponse.email, role: userResponse.role})
+        await navigate("/")
       }
     }catch(error){
       console.log(error);
@@ -31,6 +35,8 @@ export const Login = () => {
   }
 
   return (
+    <>
+    <Header/>
     <div className="flex items-center justify-center w-full h-[48rem] rounded-md">
       <div className="w-[62.5vw] h-[74.3vh] bg-slate-50 grid grid-cols-2 items-center justify-center rounded-lg shadow-lg">
         <section
@@ -85,6 +91,7 @@ export const Login = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getAllBooksByCategory } from "../../../infra/http/request-book";
 import { BookModel } from "../../../domain/models/book/book-model";
 import { BookShelf } from "../../components/book/BookShelf";
+import Header from "../../components/header/Header";
 
 export interface BookCategoryProps{
 
@@ -23,6 +24,7 @@ export const BookCategory = () => {
 
   return (
     <>
+    <Header />
       {bookList ? (
         <BookShelf  books={bookList ? bookList : []}/>
       ): (

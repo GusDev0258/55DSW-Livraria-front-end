@@ -1,11 +1,13 @@
 import { LuBookOpen, LuChevronDown } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { useCategory } from "../../../hooks/useCategory";
+import { useUserDetails } from "../../../context/userContext";
 
 type Props = React.ComponentProps<"nav">;
 
 export const NavBar = (props: Props) => {
   const { categoryList } = useCategory();
+  const { userDetails } = useUserDetails();
 
   function handleCategoryShow(): void {
     document.querySelector(".category-nav")?.classList.toggle("hidden");
@@ -81,6 +83,11 @@ export const NavBar = (props: Props) => {
             Sobre nós
           </Link>
         </li>
+        {userDetails?.role === "ADMIN" && (
+          <li>
+            <Link to={"/book/register"} className="p-4 hover:bg-emerald-600 hover:text-zinc-100 rounded">Registrar livro</Link>
+          </li>
+        )}
       </ul>
       <section className="flex items-center justify-center gap-2">
         <div className="bg-transparent border-2 border-emerald-600 border-solid rounded-full p-1 text-emerald-700">

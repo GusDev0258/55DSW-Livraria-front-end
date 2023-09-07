@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { BookModel } from "../../../domain/models/book/book-model";
 import { LuArrowRight } from "react-icons/lu";
 import Skeleton from 'react-loading-skeleton';
+import Header from "../../components/header/Header";
 
 export const BookDetail = () => {
   const [book, setBook] = React.useState<BookModel | null>(null);
@@ -19,6 +20,7 @@ export const BookDetail = () => {
   }, [bookId]);
   return (
     <>
+    <Header />
       {book ? (
         <section className="mt-4 w-full flex justify-center flex-col">
           <header className="w-full h-32 bg-gray-100 flex items-center justify-around rounded">

@@ -3,21 +3,22 @@ import Banner from "../../assets/banner1.png";
 import { BookShelf } from "../components/book/BookShelf";
 import { BookModel } from "../../domain/models/book/book-model";
 import { useAllBooks } from "../hooks/useBook";
+import Header from "../components/header/Header";
 
 export interface HomeProps {}
 
-
 export const Home = () => {
   const [bookList, setBookList] = React.useState<BookModel[] | []>([]);
-  const {books} = useAllBooks();
+  const { books } = useAllBooks();
 
   React.useEffect(() => {
-    if(books){
-      setBookList(books)
+    if (books) {
+      setBookList(books);
     }
-  },[books])
+  }, [books]);
   return (
     <>
+      <Header />
       <img className="w-full h-96 object-cover" src={Banner}></img>
       {bookList && <BookShelf books={bookList} />}
       <h1 className="text-gray-950">React TS Home</h1>
