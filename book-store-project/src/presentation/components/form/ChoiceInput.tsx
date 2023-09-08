@@ -82,7 +82,7 @@ export const ChoiceInput = (props: Props) => {
         onClick={() => setIsListVisible(true)}
       />
       {isListVisible && list.length > 0 && (
-        <div className="items-list absolute top-16 bg-zinc-50 text-sm text-zinc-800 border-2 border-solid border-emerald-500 rounded-b-md w-full overflow-y-scroll h-24">
+        <div className="items-list absolute top-16 bg-zinc-50 text-sm text-zinc-800 border-2 border-solid border-emerald-500 rounded-b-md w-full overflow-y-scroll h-24" onMouseLeave={() => setIsListVisible(false)}>
           <ul className="list-none flex flex-col gap-1 ">
             {list.map((item: GenericItem) => (
               <li className="list-item p-2 m-2 hover:bg-emerald-600 hover:text-zinc-100 cursor-pointer rounded-md" key={item.id} onClick={() => handleItemClick(item)}>
@@ -92,11 +92,11 @@ export const ChoiceInput = (props: Props) => {
           </ul>
         </div>
       )}
-        <div className="selected-items h-32 flex ">
+        <div className="selected-items h-32 flex">
       {selectedItems.length > 0 && (
-          <ul className="flex items-start gap-2 flex-1 flex-wrap w-full h-24">
+          <ul className="flex items-start gap-2 flex-1 flex-wrap w-full h-24 mt-2">
             {selectedItems.map((item: GenericItem) => (
-              <li key={item.id} className="bg-emerald-400 text-zinc-200 text-xs p-2 m-0 rounded-lg flex items-center justify-center gap-2">{item.name} <button onClick={() => handleRemoveItem(item)}><LuX size="12" /></button></li>
+              <li key={item.id} className="bg-emerald-400 text-zinc-200 text-xs p-2 m-0 rounded-lg flex items-center justify-center gap-2">{item.name} <button className="" onClick={() => handleRemoveItem(item)}><LuX size="16" /></button></li>
             ))}
           </ul>
       )}
