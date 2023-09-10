@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultInput } from "../../components/form/DefaultInput";
 import DefaultRadioButton from "../../components/form/DefaultRadio";
 import { DefaultTextArea } from "../../components/form/DefaultTextArea";
 import Header from "../../components/header/Header";
+import ChoiceInput from "../../components/form/ChoiceInput";
+import { useCategory } from "../../hooks/useCategory";
+import { useAuthor } from "../../hooks/useAuthor";
+import { useUserDetails } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
+import { Book } from "../../components/book/Book";
+import { AuthorModel } from "../../../domain/models/author/author-model";
+import { CategoryModel } from "../../../domain/models/category/category-model";
 
 export const BookRegister = () => {
   const [version, setVersion] = useState("DIGITAL");
@@ -14,15 +22,25 @@ export const BookRegister = () => {
   const [releaseDate, setReleaseDate] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const { categoryList } = useCategory();
+  const {authorList} = useAuthor();
+  const [selectedCategories, setSelectedCategories] = useState<CategoryModel[]>([]);
+  const [selectedAuthors, setSelectedAuthors] = useState<AuthorModel[]>([]);
+  const {userDetails} = useUserDetails();
+  const navigate = useNavigate();
 
   const handleVersionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVersion(event.target.value);
   };
 
+  useEffect(() => {
+    userDetails?.role != "ROLE_ADMIN" ?  navigate("/") : "";
+  })
+
   return (
-    <div className="flex items-center justify-center flex-col">
+      <div className="flex items-center justify-center flex-col">
       <Header />
-      <main className="flex items-center justify-center gap-8 p-4 container">
+      <main className="flex items-start justify-center gap-8 p-4 container">
         <section className=" flex flex-col h-full items-start p-6 justify-center">
           <div className="flex flex-col mb-2">
             <h1 className="text-3xl text-zinc-900">Detalhes do livro</h1>
@@ -132,12 +150,20 @@ export const BookRegister = () => {
                 value="FISICO"
               />
             </fieldset>
-            <button className="text-zinc-600">Cadastrar</button>
+            <ChoiceInput label="Categorias" id="category" itemList={categoryList.map((category) =>({
+              name: category.name,
+              id: category.id
+            }))} onChangeItems={(items) => {setSelectedCategories(items)}}/>
+            <ChoiceInput label="Autores" id="author" itemList={authorList.map((author) =>({
+              name: author.name,
+              id: author.id
+            }))} onChangeItems={(items) => {setSelectedAuthors(items)}}/>
+            <button className="text-zinc-600 bg-emerald-500 rounded-xl p-2 mt-10">Cadastrar</button>
           </form>
         </section>
-        <section className="flex items-center justify-center border-2 border-solid bg-zinc-100 shadow-md p-2 rounded">
-              <img className="object-fill w-full h-full" src={cover} />
-            </section>
+        {cover != "" && (
+          <Book cover={cover} name={name} author={selectedAuthors} price={+price}/>
+        )}
       </main>
     </div>
   );

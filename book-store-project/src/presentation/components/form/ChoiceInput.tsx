@@ -22,7 +22,7 @@ export const ChoiceInput = (props: Props) => {
   const [list, setList] = useState<GenericItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<GenericItem[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
-  const [isListVisible, setIsListVisible] = useState(true); 
+  const [isListVisible, setIsListVisible] = useState(false); 
 
   useEffect(() => {
     setList(props.itemList);
@@ -43,20 +43,21 @@ export const ChoiceInput = (props: Props) => {
 
     if (itemIndex === -1) {
       setSelectedItems([...selectedItems, item]);
+      props.onChangeItems([...selectedItems, item]);
     } else {
       const updatedItems = [...selectedItems];
       updatedItems.splice(itemIndex, 1);
       setSelectedItems(updatedItems);
     }
-
+    
     setIsListVisible(false); 
     setSearchValue(""); 
-    props.onChangeItems(selectedItems);
   }
 
   const handleRemoveItem = (itemToRemove: GenericItem) => {
     const updatedItems = selectedItems.filter((item) => item.id !== itemToRemove.id);
     setSelectedItems(updatedItems);
+    props.onChangeItems(updatedItems);
   };
   
 
@@ -110,3 +111,4 @@ export const ChoiceInput = (props: Props) => {
     </div>
   );
 };
+export default ChoiceInput;

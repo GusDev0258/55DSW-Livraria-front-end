@@ -7,7 +7,7 @@ export type BookModel = {
   name: string;
   language: string;
   pagesNumber: number;
-  isbn: number;
+  isbn: string;
   price: number;
   releaseDate: Date;
   version: number;

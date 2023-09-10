@@ -17,3 +17,12 @@
   -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
 }
+#root{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+}

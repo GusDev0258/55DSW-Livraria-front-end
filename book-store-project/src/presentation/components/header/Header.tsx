@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 import SearchBar from "./search_bar/Search-Bar";
 import { LuUser, LuShoppingCart, LuLogOut } from "react-icons/lu";
-import Logo from "../../../assets/logo2.svg";
+import Logo from "../../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
 import { useUserDetails } from "../../context/userContext";
@@ -21,14 +21,13 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <>
-      <InformationHeader />
+    <div className="w-full">
       <header
-        className="h-24 w-full bg-zinc-50 text-zinc-600 text-base flex items-center justify-center gap-10 border-2 border-zinc-200 border-solid"
+        className="h-28 bg-zinc-50 text-zinc-600 text-base flex items-center justify-center gap-10 border-2 border-zinc-200 border-solid"
         {...props}
       >
-        <div className=" w-36 h-36 flex items-center justify-center mr-4">
-          <img src={Logo} alt="Logo" className="w-full rounded block" />
+        <div className=" w-36 h-20 flex items-center justify-center font-mono font-bold xl:text-xl 2xl:text-2xl">
+          <img src={Logo} alt="LGC logo" />
         </div>
         <SearchBar placeholder="Buscar livros..." type="search" />
         <div className="flex items-center justify-center gap-2">
@@ -54,7 +53,7 @@ export const Header = (props: Props) => {
         </div>
       </header>
       <NavBar />
-    </>
+    </div>
   );
 };
 export default Header;

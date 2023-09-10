@@ -19,9 +19,10 @@ export const Home = () => {
   return (
     <>
       <Header />
-      <img className="w-full h-96 object-cover" src={Banner}></img>
+      <main className="container flex flex-col justify-center items-start">
+      <img className="w-full h-72 object-cover" src={Banner}></img>
       {bookList && <BookShelf books={bookList} />}
-      <h1 className="text-gray-950">React TS Home</h1>
+      </main>
     </>
   );
 };

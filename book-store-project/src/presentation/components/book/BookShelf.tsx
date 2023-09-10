@@ -20,28 +20,26 @@ export const BookShelf = (props: BookShelfProps) => {
   };
 
   return (
-    <>
+    <section className="container">
       {bookList.length > 0 ? (
         <div>
-          <h1 className="text-3xl text-gray-950 font-bold m-4 text-center">
-            Nossa coleção de livros
+          <h1 className="text-2xl text-gray-950 font-bold m-4 text-center font-sans italic">
+            Escolha sua próxima aventura
           </h1>
-          <div className="w-full m-0 h-auto flex items-center justify-center">
-            <ul className="grid grid-cols-5 gap-4 items-center justify-center mt-6">
-              {bookList &&
-                bookList.map((book: BookModel) => (
-                  <li key={book.id} onClick={handleNavigation(book.id)}>
-                    {" "}
-                    <Book
-                      name={book.name}
-                      cover={book.cover}
-                      author={book.author}
-                      price={book.price}
-                    />
-                  </li>
-                ))}
-            </ul>
-          </div>
+          <ul className="flex flex-1 flex-wrap gap-4 items-center justify-center mt-6">
+            {bookList &&
+              bookList.map((book: BookModel) => (
+                <li key={book.id} onClick={handleNavigation(book.id)}>
+                  {" "}
+                  <Book
+                    name={book.name}
+                    cover={book.cover}
+                    author={book.author}
+                    price={book.price}
+                  />
+                </li>
+              ))}
+          </ul>
         </div>
       ) : (
         <div>
@@ -50,70 +48,18 @@ export const BookShelf = (props: BookShelfProps) => {
           </h1>
           <div className="w-full m-0 h-auto flex items-center justify-center">
             <ul className="grid grid-cols-5 gap-8 items-center justify-center mt-6">
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
-              <li className="flex flex-col gap-1">
-                <Skeleton width={188} height={256} className="" />
-                <Skeleton width={140} height={20} className="" />
-                <Skeleton width={80} height={10} className="" />
-                <Skeleton width={60} height={10} className="" />
-              </li>
+              {[...Array(10)].map((_, index) => (
+                <li className="flex flex-col gap-1" key={index}>
+                  <Skeleton width={188} height={256} className="" />
+                  <Skeleton width={140} height={20} className="" />
+                  <Skeleton width={80} height={10} className="" />
+                  <Skeleton width={60} height={10} className="" />
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 };
