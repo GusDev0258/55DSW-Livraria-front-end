@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 import { CategoryModel } from "../../../../domain/models/category/category-model";
-import { useCategory } from "../../../hooks/useCategory";
 import { Link } from "react-router-dom";
 
 export type Props = {

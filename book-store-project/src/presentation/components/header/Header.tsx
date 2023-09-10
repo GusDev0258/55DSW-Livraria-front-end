@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
 import { useUserDetails } from "../../context/userContext";
 import NavBar from "./nav_bar/Nav-Bar";
-import InformationHeader from "./Information-header";
 
 type Props = ComponentProps<"header">;
 
