@@ -11,12 +11,12 @@ export type Props = {
 
 export const DefaultTextArea = (props: Props | HTMLProps<HTMLTextAreaElement>) => {
   return (
-    <div className={`flex flex-1 flex-col items-start justify-center gap-1 ${props.size ? props.size : "w-72"}`}>
-      <label htmlFor={props.id} className="text-sm text-emerald-800 font-sans font-bold">
+    <div className={`flex flex-1 flex-col items-start justify-center gap-1 ${props.size ? props.size : "w-96"}`}>
+      <label htmlFor={props.id} className="text-base text-emerald-800 font-sans font-bold">
         {props.label}
       </label>
       <textarea
-        className="w-full p-4 bg-transparent text-sm text-zinc-800 focus:outline-none border-2 border-solid border-emerald-500 rounded-md focus:shadow-sm focus:shadow-emerald-400 resize-none"
+        className="w-full p-4 bg-transparent text-lg text-zinc-800 focus:outline-none border-2 border-solid border-emerald-500 rounded-md focus:shadow-sm focus:shadow-emerald-400 resize-none"
         id={props.id}
         placeholder={props.placeholder}
         rows={3}
