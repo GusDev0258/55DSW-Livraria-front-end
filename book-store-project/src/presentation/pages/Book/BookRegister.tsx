@@ -14,6 +14,8 @@ import { CategoryModel } from "../../../domain/models/category/category-model";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import "../../styles/animations/register-form-animation.css";
+import { PublisherModelParams } from "../../../domain/models/publisher/publisher-model";
+import usePubliser from "../../hooks/usePubliser";
 
 export const BookRegister = () => {
   const [version, setVersion] = useState("DIGITAL");
@@ -27,6 +29,7 @@ export const BookRegister = () => {
   const [description, setDescription] = useState("");
   const { categoryList } = useCategory();
   const { authorList } = useAuthor();
+  const { publisherList } = usePubliser();
   const [selectedCategories, setSelectedCategories] = useState<CategoryModel[]>(
     []
   );
@@ -34,6 +37,8 @@ export const BookRegister = () => {
   const { userDetails } = useUserDetails();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
+  const [selectedPublisher, setSelectedPublisher] =
+    useState<PublisherModelParams[]>();
 
   const handleVersionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVersion(event.target.value);
@@ -75,15 +80,19 @@ export const BookRegister = () => {
             </p>
             <div className="flex items-center">
               <span
-                className={`text-lg bg-emerald-500 p-2 px-4 rounded-full transition-all`}
+                className={`text-lg bg-emerald-500 py-2 px-4 rounded-full border-solid border-2 border-emerald-700 transition-all`}
               >
                 1
               </span>
-              {(currentPage >= 1) && (
+              {currentPage >= 1 && (
                 <span className="w-8 h-1 bg-emerald-500 decor-line"></span>
               )}
               <span
-                className={`text-lg ${currentPage >= 1 ? "bg-emerald-500" : "bg-transparent"} p-2 px-4 rounded-full transition-all`}
+                className={`text-lg ${
+                  currentPage >= 1
+                    ? "bg-emerald-500 text-zinc-100 ml-0"
+                    : "bg-transparent text-zinc-600 ml-4"
+                }  py-2 px-4 rounded-full border-solid border-2 border-emerald-700 transition-all`}
               >
                 2
               </span>
@@ -91,7 +100,11 @@ export const BookRegister = () => {
                 <span className="w-8 h-1 bg-emerald-500 decor-line"></span>
               )}
               <span
-                className={`text-lg ${currentPage >= 2 ? "bg-emerald-500" : "bg-transparent"}  p-2 px-4 rounded-full transition-all`}
+                className={`text-lg ${
+                  currentPage >= 2
+                    ? "bg-emerald-500 text-zinc-100 ml-0"
+                    : "bg-transparent text-zinc-600 ml-4"
+                }  p-2 px-4 rounded-full border-solid border-2 border-emerald-700 transition-all`}
               >
                 3
               </span>
@@ -239,6 +252,7 @@ export const BookRegister = () => {
                   onChangeItems={(items) => {
                     setSelectedCategories(items);
                   }}
+                  multiple={true}
                 />
                 <ChoiceInput
                   label="Autores"
@@ -250,6 +264,19 @@ export const BookRegister = () => {
                   onChangeItems={(items) => {
                     setSelectedAuthors(items);
                   }}
+                  multiple={true}
+                />
+                <ChoiceInput
+                  label="Editora"
+                  id="publisher"
+                  itemList={publisherList.map((publisher) => ({
+                    name: publisher.name,
+                    id: publisher.id,
+                  }))}
+                  onChangeItems={(items) => {
+                    setSelectedPublisher(items);
+                  }}
+                  multiple={false}
                 />
                 <button
                   className="text-zinc-600 bg-emerald-500 rounded-xl p-2 flex items-center justify-center gap-2"

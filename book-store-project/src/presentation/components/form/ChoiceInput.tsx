@@ -11,6 +11,7 @@ export type Props = {
   value?: string;
   itemList: GenericItem[];
   onChangeItems: (items: GenericItem[]) => void;
+  multiple: boolean;
 };
 
 export type GenericItem = {
@@ -106,7 +107,7 @@ export const ChoiceInput = (props: Props) => {
           </ul>
         </div>
       )}
-      {selectedItems.length > 0 && (
+      {(props.multiple && selectedItems.length > 0) && (
         <div className="selected-items flex flex-wrap">
           <ul className="flex items-start gap-2 flex-1 flex-wrap w-full mt-2">
             {selectedItems.map((item: GenericItem) => (
