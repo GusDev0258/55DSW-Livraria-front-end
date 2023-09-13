@@ -1,8 +1,8 @@
 export type PublisherModel = {
   id: number;
   name: string;
-  phone: string;
-  email: string;
+  phone?: string;
+  email?: string;
 }
 
 export type PublisherModelParams = {

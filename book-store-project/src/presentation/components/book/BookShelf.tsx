@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import { BookModel } from "../../../domain/models/book/book-model";
+import { BookModelResponse } from "../../../domain/models/book/book-model";
 import { Book } from "./Book";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export interface BookShelfProps {
-  books: BookModel[];
+  books: BookModelResponse[];
 }
 
 export const BookShelf = (props: BookShelfProps) => {
-  const [bookList, setBookList] = useState<BookModel[] | []>([]);
+  const [bookList, setBookList] = useState<BookModelResponse[] | []>([]);
   const navigate = useNavigate();
   useEffect(() => {
     setBookList(props.books);
-  });
-  const handleNavigation = (id: number) => () => {
+  },[props.books]);
+  const handleNavigation = (id?: number) => () => {
     navigate(`/book/${id}`);
   };
 
@@ -28,7 +28,7 @@ export const BookShelf = (props: BookShelfProps) => {
           </h1>
           <ul className="flex flex-1 flex-wrap gap-4 items-center justify-center mt-6">
             {bookList &&
-              bookList.map((book: BookModel) => (
+              bookList.map((book: BookModelResponse) => (
                 <li key={book.id} onClick={handleNavigation(book.id)}>
                   {" "}
                   <Book
@@ -36,6 +36,14 @@ export const BookShelf = (props: BookShelfProps) => {
                     cover={book.cover}
                     author={book.author}
                     price={book.price}
+                    category={book.category}
+                    description={book.description}
+                    isbn={book.isbn}
+                    pagesNumber={book.pagesNumber}
+                    language={book.language}
+                    publisher={book.publisher}
+                    releaseDate={book.releaseDate}
+                    version={book.version}
                   />
                 </li>
               ))}

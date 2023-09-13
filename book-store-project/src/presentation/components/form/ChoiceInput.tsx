@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { LuX } from "react-icons/lu";
+import { PublisherModel } from "../../../domain/models/publisher/publisher-model";
+import { AuthorModel } from "../../../domain/models/author/author-model";
+import { CategoryModel } from "../../../domain/models/category/category-model";
 
 export type Props = {
   label: string;
@@ -14,10 +17,7 @@ export type Props = {
   multiple: boolean;
 };
 
-export type GenericItem = {
-  name: string;
-  id: number;
-};
+export interface GenericItem extends PublisherModel, AuthorModel, CategoryModel {}
 
 export const ChoiceInput = (props: Props) => {
   const [list, setList] = useState<GenericItem[]>([]);

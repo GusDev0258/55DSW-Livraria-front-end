@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { getBookById } from "../../../infra/http/request-book";
 import { Link, useParams } from "react-router-dom";
-import { BookModel } from "../../../domain/models/book/book-model";
+import { BookModelResponse } from "../../../domain/models/book/book-model";
 import { LuArrowRight } from "react-icons/lu";
 import Skeleton from 'react-loading-skeleton';
 import Header from "../../components/header/Header";
 
 export const BookDetail = () => {
-  const [book, setBook] = React.useState<BookModel | null>(null);
+  const [book, setBook] = React.useState<BookModelResponse | null>(null);
   const bookId = useParams().id;
 
   useEffect(() => {

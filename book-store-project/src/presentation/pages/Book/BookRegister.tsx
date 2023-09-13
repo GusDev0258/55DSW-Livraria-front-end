@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import { DefaultInput } from "../../components/form/DefaultInput";
 import DefaultRadioButton from "../../components/form/DefaultRadio";
 import { DefaultTextArea } from "../../components/form/DefaultTextArea";
@@ -8,14 +8,16 @@ import { useCategory } from "../../hooks/useCategory";
 import { useAuthor } from "../../hooks/useAuthor";
 import { useUserDetails } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
-import { Book } from "../../components/book/Book";
 import { AuthorModel } from "../../../domain/models/author/author-model";
 import { CategoryModel } from "../../../domain/models/category/category-model";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
+import moment from "moment";
 
 import "../../styles/animations/register-form-animation.css";
-import { PublisherModelParams } from "../../../domain/models/publisher/publisher-model";
+import { PublisherModel } from "../../../domain/models/publisher/publisher-model";
 import usePubliser from "../../hooks/usePubliser";
+import { useToken } from "../../hooks/useToken";
+import { registerBook } from "../../../infra/http/request-book";
 
 export const BookRegister = () => {
   const [version, setVersion] = useState("DIGITAL");
@@ -37,16 +39,16 @@ export const BookRegister = () => {
   const { userDetails } = useUserDetails();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedPublisher, setSelectedPublisher] =
-    useState<PublisherModelParams[]>();
+  const [selectedPublisher, setSelectedPublisher] = useState<PublisherModel[]>();
+  const { token } = useToken();
+
+  // useEffect(() => {
+  //   // userDetails?.role != "ROLE_ADMIN" ? navigate("/") : "";
+  // },[]);
 
   const handleVersionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVersion(event.target.value);
   };
-
-  useEffect(() => {
-    userDetails?.role != "ROLE_ADMIN" ? navigate("/") : "";
-  });
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -56,6 +58,36 @@ export const BookRegister = () => {
     setCurrentPage(currentPage - 1);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    try{
+      const authorIds = selectedAuthors.map((author) => author.id);
+      const categoryIds = selectedCategories.map((category) => category.id);
+      const publisherId = selectedPublisher?.map((publisher) => publisher.id);
+      const pId = publisherId[0];
+      const dateReleased = moment.utc(releaseDate).format("DD/MM/YYYY");
+      const bookData = {
+        name,
+        language,
+        pagesNumber: +pagesNumber,
+        isbn,
+        price: +price,
+        releaseDate: dateReleased,
+        version,
+        description,
+        cover,
+        publisher: pId,
+        authors: authorIds,
+        categories: categoryIds,
+      };
+      if(bookData){
+        registerBook(token, bookData).then((response) => console.log(response));
+      }
+    }catch(error){
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center flex-col w-full">
       <Header />
@@ -63,12 +95,6 @@ export const BookRegister = () => {
         <section className="w-1/2 flex items-center justify-center">
           {cover != "" && (
             <div className="mt-6">
-              <Book
-                cover={cover}
-                name={name}
-                author={selectedAuthors}
-                price={+price}
-              />
             </div>
           )}
         </section>
@@ -110,7 +136,7 @@ export const BookRegister = () => {
               </span>
             </div>
           </div>
-          <form className="flex flex-col gap-6 w-full">
+          <form className="flex flex-col gap-6 w-full" onSubmit={handleSubmit}>
             {currentPage == 0 && (
               <>
                 <DefaultInput
@@ -157,6 +183,7 @@ export const BookRegister = () => {
                 <button
                   className="text-zinc-600 bg-emerald-500 rounded-xl p-2 flex items-center justify-center gap-2"
                   onClick={handleNextPage}
+                  type="button"
                 >
                   Continuar <LuArrowRight size="20" />
                 </button>
@@ -228,12 +255,14 @@ export const BookRegister = () => {
                   <button
                     className="text-zinc-600 bg-emerald-500 rounded-xl p-2 flex flex-1 items-center justify-center gap-2"
                     onClick={handlePreviousPage}
+                    type="button"
                   >
                     <LuArrowLeft size="20" /> Voltar
                   </button>
                   <button
                     className="text-zinc-600 bg-emerald-500 rounded-xl p-2 flex flex-1 items-center justify-center gap-2"
                     onClick={handleNextPage}
+                    type="button"
                   >
                     Continuar <LuArrowRight size="20" />
                   </button>
@@ -278,15 +307,22 @@ export const BookRegister = () => {
                   }}
                   multiple={false}
                 />
-                <button
-                  className="text-zinc-600 bg-emerald-500 rounded-xl p-2 flex items-center justify-center gap-2"
-                  onClick={handlePreviousPage}
-                >
-                  <LuArrowLeft size="20" /> Voltar
-                </button>
+                <div className="flex items-center justify-center w-full flex-wrap gap-6">
+                  <button
+                    className="text-zinc-600 bg-emerald-500 rounded-xl p-2 flex flex-1 items-center justify-center gap-2"
+                    type="button"
+                    onClick={handlePreviousPage}
+                  >
+                    <LuArrowLeft size="20" /> Voltar
+                  </button>
+                  <button
+                    className="text-zinc-600 bg-emerald-500 rounded-xl p-2 flex flex-1 items-center justify-center gap-2" type="submit"
+                  >
+                    Cadastrar
+                  </button>
+                </div>
               </>
             )}
-            {currentPage == 3 && <></>}
           </form>
         </section>
       </main>

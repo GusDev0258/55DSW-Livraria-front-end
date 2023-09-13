@@ -1,6 +1,6 @@
-import { BookModel } from "../../../domain/models/book/book-model";
+import { BookModelResponse } from "../../../domain/models/book/book-model";
 
-export const Book = (props: BookModel) => {
+export const Book = (props: BookModelResponse) => {
   return (
     <div className="h-96 w-56 hover:scale-110 hover:cursor-pointer flex flex-col justify-start items-center">
       <section className="w-52 h-72 flex items-center justify-center border-2 border-solid bg-zinc-100 shadow-md p-2 rounded">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAllBooksByCategory } from "../../../infra/http/request-book";
-import { BookModel } from "../../../domain/models/book/book-model";
+import { BookModelResponse } from "../../../domain/models/book/book-model";
 import { BookShelf } from "../../components/book/BookShelf";
 import Header from "../../components/header/Header";
 
@@ -12,7 +12,7 @@ export interface BookCategoryProps{
 export const BookCategory = () => {
   const categoryId = useParams().id;
 
-  const [bookList, setBookList] = useState<BookModel[] | []>([]);
+  const [bookList, setBookList] = useState<BookModelResponse[] | []>([]);
 
   useEffect(() => {
     getAllBooksByCategory(categoryId).then((books) => {

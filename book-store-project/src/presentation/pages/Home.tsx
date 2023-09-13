@@ -1,14 +1,14 @@
 import * as React from "react";
 import Banner from "../../assets/banner1.png";
 import { BookShelf } from "../components/book/BookShelf";
-import { BookModel } from "../../domain/models/book/book-model";
+import { BookModelResponse } from "../../domain/models/book/book-model";
 import { useAllBooks } from "../hooks/useBook";
 import Header from "../components/header/Header";
 
 export interface HomeProps {}
 
 export const Home = () => {
-  const [bookList, setBookList] = React.useState<BookModel[] | []>([]);
+  const [bookList, setBookList] = React.useState<BookModelResponse[] | []>([]);
   const { books } = useAllBooks();
 
   React.useEffect(() => {

@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { BookModel } from '../../domain/models/book/book-model';
-import { getAllBooks } from '../../infra/http/request-book';
+import { useEffect, useState } from "react";
+import { BookModelResponse } from "../../domain/models/book/book-model";
+import { getAllBooks } from "../../infra/http/request-book";
 
-export const useAllBooks = () =>{
-  const [books, setBooks] = useState<BookModel[]>([]);
+export const useAllBooks = () => {
+  const [books, setBooks] = useState<BookModelResponse[]>([]);
 
-  useEffect(() =>{
-      getAllBooks()
+  useEffect(() => {
+    getAllBooks()
       .then((books) => {
         if (books) {
           setBooks(books);
@@ -15,7 +15,7 @@ export const useAllBooks = () =>{
       .catch((error) => {
         console.error("Erro ao buscar livros", error);
       });
-  },[])
+  }, []);
 
-  return { books};
-}
+  return { books };
+};
