@@ -3,7 +3,7 @@ import { CategoryModel } from "../category/category-model";
 import { PublisherModel } from "../publisher/publisher-model";
 
 export type BookModelResponse = {
-  id?: number;
+  id: number;
   name: string;
   language: string;
   pagesNumber: number;
@@ -27,7 +27,22 @@ export type BookModelRequest = {
   version: string;
   description: string;
   cover: string;
-  publisher?: number;
+  publisher: number;
   authors: number[];
   categories: number[];
+}
+
+export type AlterBookModel = {
+  name: string;
+  language: string;
+  pagesNumber: number;
+  isbn: string;
+  price: number;
+  releaseDate: string;
+  version: string;
+  description: string;
+  cover: string;
+  publisher: PublisherModel;
+  authors: AuthorModel[];
+  categories: CategoryModel[];
 }
