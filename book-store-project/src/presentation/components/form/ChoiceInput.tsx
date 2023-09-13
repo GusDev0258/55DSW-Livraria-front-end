@@ -54,7 +54,7 @@ export const ChoiceInput = (props: Props) => {
     }
 
     setIsListVisible(false);
-    setSearchValue("");
+    props.multiple ? setSearchValue("") : setSearchValue(item.name);
   };
 
   const handleRemoveItem = (itemToRemove: GenericItem) => {
