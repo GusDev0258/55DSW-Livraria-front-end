@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
-import { getBookById } from "../../../infra/http/request-book";
+import { deleteBook, getBookById } from "../../../infra/http/request-book";
 import { Link, useParams } from "react-router-dom";
 import { BookModelResponse } from "../../../domain/models/book/book-model";
 import { LuArrowRight } from "react-icons/lu";
 import Skeleton from 'react-loading-skeleton';
 import Header from "../../components/header/Header";
 import { useUserDetails } from '../../context/userContext';
+import { useToken } from "../../hooks/useToken";
 
 export const BookDetail = () => {
   const [book, setBook] = React.useState<BookModelResponse | null>(null);
   const bookId = useParams().id;
   const {userDetails} = useUserDetails();
+  const {token} = useToken();
 
   useEffect(() => {
     getBookById(bookId).then((book) => {
@@ -21,8 +23,8 @@ export const BookDetail = () => {
     });
   }, [bookId]);
 
-  const handleDelete = () => {
-    
+  const handleDelete = async (token: string | null, bookId: number) => {
+    await deleteBook(token, bookId);
   }
 
   return (
@@ -55,7 +57,7 @@ export const BookDetail = () => {
                 </span>
                 {
                   userDetails?.role === 'ROLE_ADMIN' && (
-                    <button className="bg-rose-600 text-zinc-50 text-sm rounded-md font-bold p-2 ml-2" onClick={handleDelete}>
+                    <button className="bg-rose-600 text-zinc-50 text-sm rounded-md font-bold p-2 ml-2" onClick={ () => handleDelete(token, book.id)}>
                       Excluir
                     </button>
                   )

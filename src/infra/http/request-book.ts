@@ -44,7 +44,7 @@ export const getAllBooksByCategory = async (categoryId: string | undefined): Pro
   }
 };
 
-export const registerBook =  async (token, bookData: BookModelRequest) => {
+export const registerBook =  async (token: string, bookData: BookModelRequest) => {
   try{
     const response = await fetch(`${BASE_URL}book/`, {
       method: "POST",
@@ -61,3 +61,17 @@ export const registerBook =  async (token, bookData: BookModelRequest) => {
     throw new Error("failed to register book");
   }
 }
+  export const deleteBook = async (token: string | null, id:number) => {
+    try {
+      await fetch(`${BASE_URL}book/${id}`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization" : `Bearer ${token}`
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
