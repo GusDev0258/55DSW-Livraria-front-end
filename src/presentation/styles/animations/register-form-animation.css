@@ -1,0 +1,19 @@
+.decor-line{
+  transition: all 0.3s ease-in-out;
+  animation: slideInFromLeft 0.5s ease-in-out;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    width: 0.5rem;
+  }
+  25%{
+    width: 1rem;
+  }
+  50%{
+    width: 1.5rem;
+  }
+  100% {
+    width: 2rem;
+  }
+}
