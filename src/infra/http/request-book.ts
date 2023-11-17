@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { BASE_URL } from "../../data/config";
-import { BookModelResponse, BookModelRequest } from "../../domain/models/book/book-model";
+import { BookModelResponse, BookModelRequest, BookUpdateDTO } from "../../domain/models/book/book-model";
 
 export const getAllBooks = async (): Promise<BookModelResponse[]> => {
   try {
@@ -71,6 +71,23 @@ export const registerBook =  async (token: string, bookData: BookModelRequest) =
           "Authorization" : `Bearer ${token}`
         }
       })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export const patchBook = async (token: string | null, bookId: number, bookData: BookUpdateDTO) => {
+    try {
+      const response = await fetch(`${BASE_URL}book/${bookId}`, {
+        method: 'PATCH',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization" : `Bearer ${token}`
+        },
+        body: JSON.stringify(bookData)
+      })
+      return await response.json();
     } catch (error) {
       console.log(error);
     }
