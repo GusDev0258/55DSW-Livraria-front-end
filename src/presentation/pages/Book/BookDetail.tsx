@@ -30,6 +30,7 @@ export const BookDetail = () => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [changingData, setChangingData] = useState<string>("");
+  const [confirmDelete, setConfirmDelete] =  useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -80,8 +81,8 @@ export const BookDetail = () => {
             </section>
             <section className="border-solid border-2 border-zinc-200 rounded-lg p-4 h-[32rem] w-[32rem] flex flex-col gap-2 items-start justify-start relative">
               {isEditing && (
-                <article className="absolute w-60 h-28 rounded-md p-2 bg-emerald-600 flex flex-col items-center justify-center right-1">
-                  <span className="text-rose-50 font-bold">
+                <article className="absolute w-60 h-28 rounded-md p-2 bg-zinc-50 flex flex-col items-center justify-center right-1 border-solid border-2 border-zinc-800">
+                  <span className="text-zinc-900 font-bold">
                     Editando: {book.name}
                   </span>
                   <section>
@@ -116,10 +117,35 @@ export const BookDetail = () => {
                 <span className="bg-emerald-200 text-emerald-500 text-sm font-bold p-2 rounded-md">
                   Disponível
                 </span>
+                {confirmDelete && (
+                  <article className="absolute w-60 h-28 rounded-md p-2 bg-zinc-50 flex flex-col items-center justify-center right-5 top-1 text-center border-solid border-2 border-zinc-900">
+                    <span className="text-zinc-900 font-bold">
+                      Tem certeza que deseja excluir {book.name}?
+                    </span>
+                    <section>
+                      <button
+                        className="bg-emerald-700 text-rose-50 rounded-md px-4 py-2 mt-1 outline-none border-none focus:outline-none hover:bg-emerald-900 font-bold"
+                        onClick={() => {
+                          handleDelete(token, book.id);
+                        }}
+                      >
+                        Sim
+                      </button>
+                      <button
+                        className="bg-rose-700 text-rose-50 rounded-md px-4 py-2 mt-1 outline-none border-none focus:outline-none hover:bg-rose-900 font-bold ml-2"
+                        onClick={() => {
+                          setConfirmDelete(false);
+                        }}
+                      >
+                        Não
+                      </button>
+                    </section>
+                  </article>
+                )}
                 {userDetails?.role === "ROLE_ADMIN" && (
                   <button
                     className="bg-rose-600 text-zinc-50 text-sm rounded-md font-bold p-2 ml-2"
-                    onClick={() => handleDelete(token, book.id)}
+                    onClick={() =>  setConfirmDelete(true)}
                   >
                     Excluir
                   </button>
