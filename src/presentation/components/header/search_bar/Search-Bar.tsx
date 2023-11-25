@@ -39,9 +39,8 @@ export const SearchBar = (props: Props) => {
             {bookSearchList.map((book) => (
               <li
                 key={book.id}
-                className="hover:bg-emerald-500 hover:text-zinc-100 p-4 rounded-sm cursor-pointer text-sm"
               >
-                <Link to={`/book/${book.id}`}>{book.name}</Link>
+                <Link className="hover:bg-emerald-500 hover:text-zinc-100 p-4 rounded-sm cursor-pointer text-sm" to={`/book/${book.id}`}>{book.name}</Link>
               </li>
             ))}
           </ul>

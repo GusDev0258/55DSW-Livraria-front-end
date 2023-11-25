@@ -253,7 +253,7 @@ export const BookRegister = () => {
                     name="version"
                     checked={version === "FISICO"}
                     onChange={handleVersionChange}
-                    value="FISICO"
+                    value="PRINTED"
                   />
                 </fieldset>
                 <div className="flex items-center justify-center w-full flex-wrap gap-6">

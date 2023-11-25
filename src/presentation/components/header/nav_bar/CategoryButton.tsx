@@ -21,7 +21,7 @@ export const CategoryButton = (props: Props) => {
         className="px-4 py-2 bg-emerald-600 text-zinc-200 font-bold rounded-md flex items-center justify-center gap-2 hover:bg-emerald-800 hover:text-zinc-100"
         onClick={handleListVisibility}
       >
-        {isListVisible ? <LuChevronUp size="16px" /> : <LuChevronDown size="16px" /> }
+        {isListVisible ? <LuChevronUp size="16px" /> : <LuChevronDown size="16px" />}
         Categorias
       </button>
       {isListVisible && props.categoryList.length > 0 && (
@@ -36,9 +36,9 @@ export const CategoryButton = (props: Props) => {
             {props.categoryList.map((category) => (
               <li
                 key={category.id}
-                className="p-2 h-auto hover:bg-emerald-600 hover:text-zinc-100 text-sm cursor-pointer rounded text-center md:text-xs"
               >
-                <Link to={`/book/category/${category.id}`}>
+                <Link className="p-2 h-auto hover:bg-emerald-600 hover:text-zinc-100 text-sm cursor-pointer rounded text-center md:text-xs"
+                  to={`/book/category/${category.id}`}>
                   {category.name}
                 </Link>{" "}
               </li>

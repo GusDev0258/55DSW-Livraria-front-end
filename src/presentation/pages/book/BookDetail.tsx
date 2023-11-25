@@ -154,12 +154,12 @@ export const BookDetail = () => {
                   <h2 className="text-2xl text-zinc-600 mt-2">
                     {changingData ? changingData : book.name}
                   </h2>
-                  <button
+                  {userDetails?.role === "ROLE_ADMIN" && (<button
                     onClick={() => setIsEditing(!isEditing)}
                     className="h-full p-2 flex items-center justify-center"
                   >
                     <FiEdit size={16} color={"#111"} />
-                  </button>
+                  </button>)}
                 </div>
                 <p className="text-zinc-400 text-sm mb-2">
                   Escrito por: {book.author.map((author) => author.name)}
@@ -174,12 +174,9 @@ export const BookDetail = () => {
                 <p className="text-zinc-300 text-sm mb-4">
                   Formato:{" "}
                   <span className="text-zinc-700 font-bold">
-                    {book.version}
+                    {book.version === "PRINTED" ? "FÍSICO" : book.version}
                   </span>
                 </p>
-              </section>
-              <section>
-                <span className="text-zinc-600 text-xs">Quantidade</span>
               </section>
             </section>
           </section>
