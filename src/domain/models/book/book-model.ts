@@ -46,3 +46,18 @@ export type AlterBookModel = {
   authors: AuthorModel[];
   categories: CategoryModel[];
 }
+
+export interface BookUpdateDTO {
+  name?: string;
+  language?: string;
+  pagesNumber?: number;
+  isbn?: string;
+  price?: number;
+  releaseDate?: string;
+  version?: string;
+  description?: string;
+  cover?: string;
+  publisher?: PublisherModel;
+  authors?: AuthorModel[];
+  categories?: CategoryModel[];
+}

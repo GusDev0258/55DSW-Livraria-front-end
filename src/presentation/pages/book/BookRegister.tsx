@@ -81,7 +81,7 @@ export const BookRegister = () => {
         categories: categoryIds,
       };
       if(bookData){
-        registerBook(token, bookData).then((response) => console.log(response));
+        registerBook(token as string, bookData).then(() => navigate("/"));
       }
     }catch(error){
       console.log(error);
@@ -95,6 +95,11 @@ export const BookRegister = () => {
         <section className="w-1/2 flex items-center justify-center">
           {cover != "" && (
             <div className="mt-6">
+              <img
+                className="w-72 h-[27rem]"
+                src={cover}
+                alt="Capa do livro"
+              />
             </div>
           )}
         </section>
@@ -248,7 +253,7 @@ export const BookRegister = () => {
                     name="version"
                     checked={version === "FISICO"}
                     onChange={handleVersionChange}
-                    value="FISICO"
+                    value="PRINTED"
                   />
                 </fieldset>
                 <div className="flex items-center justify-center w-full flex-wrap gap-6">

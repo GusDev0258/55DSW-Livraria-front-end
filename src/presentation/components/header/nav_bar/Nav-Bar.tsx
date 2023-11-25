@@ -25,30 +25,6 @@ export const NavBar = (props: Props) => {
             Home
           </Link>
         </li>
-        <li>
-          <Link
-            className="p-4 hover:bg-emerald-600 hover:text-zinc-100 rounded"
-            to={"/books"}
-          >
-            Livros
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="p-4 hover:bg-emerald-600 hover:text-zinc-100 rounded"
-            to={"/contact"}
-          >
-            Fale Conosco
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="p-4 hover:bg-emerald-600 hover:text-zinc-100 rounded"
-            to={"/about"}
-          >
-            Sobre nós
-          </Link>
-        </li>
         {userDetails?.role === "ROLE_ADMIN" && (
           <li>
             <Link

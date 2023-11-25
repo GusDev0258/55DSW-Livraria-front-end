@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 import SearchBar from "./search_bar/Search-Bar";
-import { LuUser, LuShoppingCart, LuLogOut } from "react-icons/lu";
+import { LuUser, LuLogOut } from "react-icons/lu";
 import Logo from "../../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
@@ -30,12 +30,6 @@ export const Header = (props: Props) => {
         </div>
         <SearchBar placeholder="Buscar livros..." type="search" />
         <div className="flex items-center justify-center gap-2">
-        <Link
-            to={"/"}
-            className="text-zinc-600 cursor-pointer hover:bg-zinc-800 hover:text-zinc-100 rounded p-3"
-          >
-            <LuShoppingCart size="24px" />
-          </Link>
           {(token && userDetails) ? (
             <div className="flex gap-8 items-center justify-center">
             <span className="text-zinc-600">Olá, {userDetails?.firstname}</span>
