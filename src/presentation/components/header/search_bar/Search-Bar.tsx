@@ -32,7 +32,7 @@ export const SearchBar = (props: Props) => {
       />
       {bookSearchList.length > 0 && (
         <div
-          className="search-list absolute top-10 w-full bg-zinc-100 text-zinc-800 text-base rounded-t-none rounded-b-md p-4 placeholder:text-zinc-400 placeholder:px-1 outline-none focus:border-2 focus:border-emerald-400 max-h-72 overflow-y-scroll border-emerald-400 border-2 border-solid"
+          className="search-list absolute z-10 top-10 w-full bg-zinc-100 text-zinc-800 text-base rounded-t-none rounded-b-md p-4 placeholder:text-zinc-400 placeholder:px-1 outline-none focus:border-2 focus:border-emerald-400 max-h-72 overflow-y-scroll border-emerald-400 border-2 border-solid"
           onMouseLeave={handleSearchListShow}
         >
           <ul className="flex flex-col flex-1 gap-2 ">
